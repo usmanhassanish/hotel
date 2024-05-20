@@ -10,8 +10,7 @@
 			box-sizing: border-box;
 			padding: 0;
 			margin: 0;
-			font-family: 'Times New Roman', serif;
-			
+			font-family: garamond;
 		}
 		.top-left
 		{
@@ -86,9 +85,41 @@
 				height: 400px;
 			}
         }
+        #dropdown
+        {
+        	display: none;
+        	height: 100vh;
+
+        }
+        #links
+        {
+        	border-bottom: solid 3px maroon;
+        	width: 70%;
+        	margin-left: 15%;
+        }
 	</style>
 </head>
 <body>
+	<div id="dropdown" class="dropdown">
+		<div style="height: 50px;">
+		<img <img id="exit"style="float: right;margin-right: 15%;" src="exit-icon.png" >
+	    </div>
+	    <div id="links">
+	    	<h1>ROOMS</h1>
+	    </div>
+	    <div id="links">
+	    	<h1>GALLERY</h1>
+	    </div>
+	    <div id="links">
+	    	<h1>SPECIAL OFFERS</h1>
+	    </div>
+	    <div id="links">
+	    	<h1>CONTACT</h1>
+	    </div>
+
+		
+	</div>
+	<div id="full-page">
 	<div>
 		<div class="top-left">h</div>
 		<div class="top-mid">
@@ -96,20 +127,49 @@
 			<div><h2>Baaymaan Hotel</h2></div>
 		</div>
 		<div class="top-right">
-			<img style="border-radius: 5px; margin-top: 13px" src="one.png" width="30px">
+			<img id="clickableDiv" style="border-radius: 5px; margin-top: 13px" src="one.png" width="30px">
 		</div>
 	</div>
+	
 	<div class="home-image">
 		<img src="one.jpg" width="100%" height="100%">
 	</div>
 	<div class="motto">
-		
+		<i>
 		<h1>YOUR <span style="background-color: black; border-radius: 5px;">HOME</span></h1>
 		<h1 style="margin-top: 2px;"> <span style="background-color: black; border-radius: 5px;">AWAY</span> FROM</h1>
 		<h1 style="margin-top: 2px;">HOME</h1>
 		<button class="book"><h1>BOOK NOW</h1></button>
-	
+	</i>
+	</div>
 	</div>
 
+	<script type="text/javascript">
+		document.getElementById('exit').addEventListener('click', function() {
+     	var dropdown = document.getElementById('dropdown');
+     	var fullpage = document.getElementById('full-page');
+    	if (fullpage.style.display === 'none') {
+        	fullpage.style.display = 'block';
+        	dropdown.style.display = 'none';
+
+    	} else {
+        fullpage.style.display = 'block';
+        dropdown.style.display = 'none';
+    }
+});
+	</script>
+<script type="text/javascript">
+		document.getElementById('clickableDiv').addEventListener('click', function() {
+     	var dropdown = document.getElementById('dropdown');
+     	var fullpage = document.getElementById('full-page');
+    	if (dropdown.style.display === 'block') {
+        	dropdown.style.display = 'none';
+
+    	} else {
+        dropdown.style.display = 'block';
+        fullpage.style.display = 'none';
+    }
+});
+	</script>
 </body>
 </html>
