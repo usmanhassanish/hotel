@@ -4,228 +4,66 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
-	<style>
+	<style type="text/css">
 		*
 		{
 			box-sizing: border-box;
-			padding: 0;
 			margin: 0;
-			font-family: 'Times New Roman', serif;
+			padding: 0;
+			background-color: black;
+			color: white;
+		}
+		.logo
+		{
+			margin-top: 5px;
+			margin-left: 2px;
+		}
+		.top-nav
+		{
+			border: 2px solid white;
+			height: 40px;
 		}
 		.top-left
 		{
-			width: 15%;
 			float: left;
-			color: #FFFDD0;
-			height: 60px;
-			background-color: #FFFDD0;
-
-		}
-		.top-mid
-		{
-			padding-top: 3px;
-			float: left;
+			background-color: grey;
 			width: 70%;
-			color: #743a34;
-			height: 60px;
-			background-color: #FFFDD0;
+			height: 100%;
 		}
 		.top-right
 		{
 			float: left;
-			width: 15%;
-			color: maroon;
-			height: 60px;
-			background-color: #FFFDD0;
-
-
+			background-color: white;
+			width: 30%;
+			height: 100%;
 		}
 		.home-image
 		{
+			margin-top: 5px;
 			width: 100%;
-			height: 250px;
-
-
+			height: 300px;
+			border: 2px solid white;
+			border-style: dashed;
 		}
-		.motto
+		#desc
 		{
-			background-color: #FFFDD0;
-			color: black;
-			width: 70%;
-			margin: auto;
-			height: 150px;
-			margin-top: 70px;
+			width: 100%;
 			text-align: center;
-			padding-top: 20px;
-			border-radius: 5px;
-			border: 4px solid #743a34;
-			border-style: inset;
-		}
-		.book
-		{
-			background-color: #743a34;
+			background-color: black;
+			padding-top: 3px;
+			padding-bottom: 3px;
 			color: white;
-			position: fixed;
-    		bottom: 0;
-    		left: 0;
-    		width: 100%;
 		}
-		@media (min-width: 401px) and (max-width: 500px) {
-            .home-image
-			{
-				width: 100%;
-				height: 300px;
-			}
-        }
-        @media (min-width: 501px) and (max-width: 600px) {
-            .home-image
-			{
-				width: 100%;
-				height: 350px;
-			}
-        }
-        @media (min-width: 601px)  {
-            .home-image
-			{
-				width: 100%;
-				height: 400px;
-			}
-        }
-        @media (min-width: 751px)  {
-            body
-			{
-				display: none;
-			}
-        }
-        #dropdown
-        {
-        	display: none;
-        	height: 100vh;
-
-        }
-        #links
-        {
-        	border-bottom: solid 3px maroon;
-        	width: 70%;
-        	margin-left: 15%;
-        }
-        #links:hover
-        {
-        	background-color: maroon;
-        	color: white;
-        }
-        .contact-info
-        {
-        	background-color: #FFFDD0;
-        	width: 100%;
-        	height: 350px;
-        	color: #743a34;
-        	text-align: center;
-        }
-        .white-home
-        {
-        	background-color: #FFFDD0;
-        	color: white;
-        	width: 90%;
-        	border-radius: 5px;
-        	margin: auto;
-        	height: 300px;
-        	margin-top: 10px;
-        	margin-bottom: 10px;
-        }
-        a
-        {
-        	text-decoration: none;
-        	color: black;
-        }
-
 	</style>
 </head>
 <body>
-	<div id="dropdown" class="dropdown">
-		<div style="height: 50px;margin-top:25px;">
-		<img <img id="exit"style="float: right;margin-right: 15%;" src="exit-icon.png" >
-	    </div>
-	    <div id="links">
-	    	<a href="index.html"><h1>HOME</h1></a>
-	    </div>
-	    <div id="links">
-	    	<h1>ROOMS</h1>
-	    </div>
-	    <div id="links">
-	    	<h1>GALLERY</h1>
-	    </div>
-	    <div id="links">
-	    	<h1>SPECIAL OFFERS</h1>
-	    </div>
-	    <div id="links">
-	    	<a href="contact.html"><h1>CONTACT</h1></a>
-	    </div>
-
-		
+	<div class="top-nav">
+		<div class="top-left"><h2 class="logo">JOS POLO CLUB</h2></div>
+		<div class="top-right"></div>
 	</div>
-	<div id="full-page">
-	<div>
-		<div class="top-left">h</div>
-		<div class="top-mid">
-			<div><h2>Casa</h2></div>
-			<div><h2>Baaymaan Hotel</h2></div>
-		</div>
-		<div class="top-right">
-			<img id="clickableDiv" style="border-radius: 5px; margin-top: 13px" src="one.png" width="30px">
-		</div>
-	</div>
+	<div id="desc"><h2>Polo paradise: Cool and inviting</h2></div>
+	<div class="home-image"><img src="one.jpg" width="100%" height="100%"></div>
 	
-	<div class="home-image">
-		<img src="n1.jpg" width="100%" height="100%">
-	</div>
-	<div class="motto">
-		<i>
-		<h1>YOUR <span style="background-color: black; border-radius: 5px; color: white;">HOME</span></h1>
-		<h1 style="margin-top: 2px;"> <span style="background-color: black; color:white; border-radius: 5px;">AWAY</span> FROM</h1>
-		<h1 style="margin-top: 2px;">HOME</h1>
-		<button class="book"><h1>BOOK NOW</h1></button>
-	</i>
-	</div>
-	<div class="white-home">
-		
-	</div>
-	<div class="contact-info">
-		<h1>CONTACT</h1><br>
-		<h3>+234 (0) 9162446000</h3><br>
-		<h4>info@casabaaymaanhotel.com</h4><br>
-		<h4>OFF Rayfield Resort Rd, After Centre La Sharp, Rayfield. Jos</h4><br>
-		<h2>instagram</h2><br><br>
-		<h4>© 2024 CASABAYMAAN. ALL RIGHTS RESERVED</h4>
-	</div>
-	</div>
 
-	<script type="text/javascript">
-		document.getElementById('exit').addEventListener('click', function() {
-     	var dropdown = document.getElementById('dropdown');
-     	var fullpage = document.getElementById('full-page');
-    	if (fullpage.style.display === 'none') {
-        	fullpage.style.display = 'block';
-        	dropdown.style.display = 'none';
-
-    	} else {
-        fullpage.style.display = 'block';
-        dropdown.style.display = 'none';
-    }
-});
-	</script>
-<script type="text/javascript">
-		document.getElementById('clickableDiv').addEventListener('click', function() {
-     	var dropdown = document.getElementById('dropdown');
-     	var fullpage = document.getElementById('full-page');
-    	if (dropdown.style.display === 'block') {
-        	dropdown.style.display = 'none';
-
-    	} else {
-        dropdown.style.display = 'block';
-        fullpage.style.display = 'none';
-    }
-});
-	</script>
 </body>
 </html>
