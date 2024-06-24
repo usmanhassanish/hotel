@@ -1,69 +1,193 @@
+<?php
+// Retrieve data from URL
+$name = $_GET['name'];
+$db = mysqli_connect("localhost", "id22104435_zara_1", "#1free_Host", "id22104435_zara_1");
+
+if (!$db) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+error_reporting(0);
+
+$msg = "";
+
+// Function to compress image
+function compressImage($source, $destination, $quality) {
+    $info = getimagesize($source);
+    
+    if ($info['mime'] == 'image/jpeg') {
+        $image = imagecreatefromjpeg($source);
+
+        // Check if the file has EXIF data
+        if (function_exists('exif_read_data')) {
+            $exif = exif_read_data($source);
+            if ($exif && isset($exif['Orientation'])) {
+                $orientation = $exif['Orientation'];
+
+                switch ($orientation) {
+                    case 3:
+                        $image = imagerotate($image, 180, 0);
+                        break;
+
+                    case 6:
+                        $image = imagerotate($image, -90, 0);
+                        break;
+
+                    case 8:
+                        $image = imagerotate($image, 90, 0);
+                        break;
+                }
+            }
+        }
+    } elseif ($info['mime'] == 'image/gif') {
+        $image = imagecreatefromgif($source);
+    } elseif ($info['mime'] == 'image/png') {
+        $image = imagecreatefrompng($source);
+    }
+
+    imagejpeg($image, $destination, $quality);
+    imagedestroy($image); // Free up memory
+}
+
+// If upload button is clicked ...
+if (isset($_POST['upload']) && !empty($_POST['product_name']) && !empty($_POST['desc']) && !empty($_POST['price'])) {
+    $filename = $_FILES["uploadfile"]["name"];
+    $tempname = $_FILES["uploadfile"]["tmp_name"];
+    $folder = "./image/" . $filename;
+    $desc = $_POST['product_name'];
+    $price = $_POST['price'];
+
+    // Get the current filename to delete the old image
+    $query = "SELECT filename FROM image WHERE id=$name";
+    $result = mysqli_query($db, $query);
+
+    while ($data = mysqli_fetch_row($result)) {
+        $file_to_delete = 'image/' . $data[0];
+        if (file_exists($file_to_delete)) {
+            unlink($file_to_delete);
+        }
+    }
+
+    // Update the image, description, and price in the database
+    $sql = "UPDATE image SET filename='$filename', description='$desc', price='$price' WHERE id=$name";
+
+    // Execute query
+    if (mysqli_query($db, $sql)) {
+        // Compress and move the uploaded image into the folder: image
+        compressImage($tempname, $folder, 50); // Adjust compression quality here
+        $msg = "<h3>Image uploaded successfully!</h3>";
+    } else {
+        $msg = "<h3>Failed to update the database!</h3>";
+    }
+} else {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $msg = "<h3>Make sure all forms are filled!</h3>";
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
-	<style type="text/css">
-		*
-		{
-			box-sizing: border-box;
-			margin: 0;
-			padding: 0;
-			background-color: black;
-			color: white;
-		}
-		.logo
-		{
-			margin-top: 13px;
-			margin-left: 2px;
-		}
-		.top-nav
-		{
-			border: 2px solid white;
-			height: 60px;
-		}
-		.top-left
-		{
-			float: left;
-			background-color: grey;
-			width: 70%;
-			height: 100%;
-		}
-		.top-right
-		{
-			float: left;
-			background-color: white;
-			width: 30%;
-			height: 100%;
-		}
-		.home-image
-		{
-			margin-top: 5px;
-			width: 100%;
-			height: 300px;
-			border: 2px solid white;
-			border-style: dashed;
-		}
-		#desc
-		{
-			width: 100%;
-			text-align: center;
-			background-color: black;
-			padding-top: 3px;
-			padding-bottom: 3px;
-			color: white;
-		}
-	</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit Image</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style type="text/css">
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        .product {
+            width: 110px;
+            margin: auto;
+            height: 204px;
+            border-radius: 5px;
+            border: 2px solid blue;
+        }
+        .image, .desc, .price, .button {
+            border: 2px solid blue;
+            width: 100%;
+            text-align: center;
+        }
+        .image {
+            height: 118px;
+        }
+        .desc {
+            height: 30px;
+        }
+        .price {
+            height: 25px;
+        }
+        .button {
+            height: 27px;
+        }
+        #display-image {
+            width: 20%;
+            height: 50px;
+            margin: auto;
+        }
+        #content {
+            width: 40%;
+            margin: auto;
+            border: 2px solid dodgerblue;
+            margin-top: 40px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-	<div class="top-nav">
-		<div class="top-left"><h2 class="logo">JOS POLO CLUB</h2></div>
-		<div class="top-right"></div>
-	</div>
-	<div id="desc"><h2>Polo paradise: Cool and inviting</h2></div>
-	<div class="home-image"><img src="eleven.jpg" width="100%" height="100%"></div>
-	
+    <div class="product">
+        <div class="image">
+            <?php
+            $query = "SELECT * FROM image WHERE id=$name";
+            $result = mysqli_query($db, $query);
 
+            while ($data = mysqli_fetch_assoc($result)) {
+                // Add a cache-busting query string
+                echo '<img src="./image/' . htmlspecialchars($data['filename']) . '?' . time() . '" width="100%" height="100%">';
+            }
+            ?>
+        </div>
+        <div class="desc">
+            <?php
+            $query = "SELECT description FROM image WHERE id=$name";
+            $result = mysqli_query($db, $query);
+
+            while ($data = mysqli_fetch_row($result)) {
+                echo '<p>' . htmlspecialchars($data[0]) . '</p>';
+            }
+            ?>
+        </div>
+        <div class="price">
+            <?php
+            $query = "SELECT price FROM image WHERE id=$name";
+            $result = mysqli_query($db, $query);
+
+            while ($data = mysqli_fetch_row($result)) {
+                echo '<p>' . htmlspecialchars($data[0]) . '</p>';
+            }
+            ?>
+        </div>
+        <div class="button">
+            <a href="edit.php">
+                <button style="width:100%; height:100%; border-radius:0px; border: blue; background-color: blue; color: white;">CLEAR</button>
+            </a>
+        </div>
+    </div>
+
+    <div id="content">
+        <?php echo $msg; ?>
+        <form method="POST" action="" enctype="multipart/form-data">
+            <div style="border: 2px solid grey; margin-top: 5px; height: 50px;">
+                <input type="file" name="uploadfile" />
+            </div><br><br>
+            <input type="text" name="product_name" placeholder="Product Name"><br><br>
+            <input type="text" name="desc" placeholder="Description"><br><br>
+            <input type="text" name="price" placeholder="Price"><br><br>
+            <button type="submit" name="upload">UPDATE</button>
+        </form>
+    </div>
 </body>
 </html>
+
