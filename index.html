@@ -11,39 +11,44 @@
                 box-sizing: border-box;
                 font-family: Georgia;
             }
-            body
+            .content
             {
-                background-color: #2A3132;
-                color: white;
-            }
-            .ray
-            {
-                width: 50%;
-                margin: auto;
-                height: 180px;
-                border: 6px solid #FDF6F6;
-                border-style: inset;
+                width: 100%;
+                height: 400px;
+                margin-top: 50px;
                 
+                background-image: url('sunset1.jpg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .inner
+            {
+                width: 70%;
+                height: 70%;
+                display: flex;
+                justify-content: center;
+                text-align: center;
+                align-items: center;
+                background-color: white;
+                opacity: 0.6;
+                color: black;
             }
             h1
             {
-                width: 78%;
+                width: 97%;
                 margin: auto;
             }
         </style>
     </head>
     <body>
-        <div style="height: 25px;">
-
-        </div>
-        <div class="ray">
-            <img src="Ryan.jpg" width="100%" height="100%">
-        </div>
-        <div style="height: 10px;">
-
-        </div>
-        <div style="text-align: center;">
-            <h1>“We must be willing to roll the dice and lose. Prepare, at the end of the day, for none of it to work.”- Ryan Holiday</h1>
+        <div class="content">
+            <div class="inner">
+                <h1>“Sunsets are proof that endings can often be beautiful, too.” –Beau Taplin</h1>
+            </div>
         </div>
     </body>
 </html>
